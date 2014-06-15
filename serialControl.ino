@@ -17,9 +17,9 @@
 
 *******************************************************************************/
 
-#include <WString.h>
+//#include <WString.h>
 
-template<class T> inline Print &operator <<(Print &obj, T arg) { obj.print(arg); return obj; }
+template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 #define maxLength 16
 
@@ -67,7 +67,7 @@ void getIncomingChars() {
   if(inChar == 59 || inChar == 10 || inChar == 13){
     commandComplete = true;
   } else {
-    command.append(inChar);
+    command += inChar;
   }
 }
 
@@ -135,7 +135,7 @@ boolean isNumeric(char character){
   if(character >= 48 && character <= 75){
     ret = true;
   }
-  return true;
+  return ret;
 }
 
 String getArgument(int argOffset){

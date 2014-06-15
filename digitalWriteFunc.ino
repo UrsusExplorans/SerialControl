@@ -17,28 +17,21 @@
 
 *******************************************************************************/
 
-void allFunc() {
-  if(getArgument(AR1).equals(" LOW")){
-    for(int i = 0; i < 14; i++){
-      digitalWrite(i, LOW);
+void digitalWriteFunc(){
+  int pin = parseArgument(AR1);
+  if(getArgument(AR2).equals("HIGH")){
+    digitalWrite(pin, HIGH);
+    if(answer){
+      Serial << "-" << ownID << "- dw " << pin << " HIGH" << "\n";
     }
-  }
-  if(getArgument(AR1).equals("HIGH")){
-    for(int i = 0; i < 14; i++){
-      digitalWrite(i, HIGH);
+  } else {
+    if(getArgument(AR2).equals(" LOW")){
+      digitalWrite(pin, LOW);
+      if(answer){
+        Serial << "-" << ownID << "- dw " << pin << " LOW" << "\n";
+      }
+    } else {
+      // error
     }
-  }
-  if(getArgument(AR1).equals("OUTP")){
-    for(int i = 0; i < 14; i++){
-      pinMode(i, OUTPUT);
-    }
-  }
-  if(getArgument(AR1).equals("INPU")){
-    for(int i = 0; i < 14; i++){
-      pinMode(i, INPUT);
-    }
-  }
-  if(answer){
-    Serial << "-" << ownID << "- al " << getArgument(AR1) << "\n";
   }
 }

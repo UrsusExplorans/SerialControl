@@ -17,18 +17,18 @@
 
 *******************************************************************************/
 
-void digitalWriteFunc() {
+void pinModeFunc(){
   int pin = parseArgument(AR1);
-  if(getArgument(AR2).equals("HIGH")){
-    digitalWrite(pin, HIGH);
+  if(getArgument(AR2).equals("INPU")){
+    pinMode(pin, INPUT);
     if(answer){
-      Serial << "-" << ownID << "- dw " << pin << " HIGH" << "\n";
+      Serial << "-" << ownID << "- pm " << pin << " INPUT" << "\n";
     }
   } else {
-    if(getArgument(AR2).equals(" LOW")){
-      digitalWrite(pin, LOW);
+    if(getArgument(AR2).equals("OUTP")){
+      pinMode(pin, OUTPUT);
       if(answer){
-        Serial << "-" << ownID << "- dw " << pin << " LOW" << "\n";
+        Serial << "-" << ownID << "- pm " << pin << " OUTPUT" << "\n";
       }
     } else {
       // error
