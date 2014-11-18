@@ -39,6 +39,6 @@ void allFunc(){
     }
   }
   if(answer){
-    Serial << "-" << ownID << "- al " << getArgument(AR1) << "\n";
+    Serial << "-" << ownID << "- al " << getArgument(AR1) << LINE_ENDING;
   }
 }

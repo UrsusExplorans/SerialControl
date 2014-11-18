@@ -22,13 +22,13 @@ void pinModeFunc(){
   if(getArgument(AR2).equals("INPU")){
     pinMode(pin, INPUT);
     if(answer){
-      Serial << "-" << ownID << "- pm " << pin << " INPUT" << "\n";
+      Serial << "-" << ownID << "- pm " << pin << " INPUT" << LINE_ENDING;
     }
   } else {
     if(getArgument(AR2).equals("OUTP")){
       pinMode(pin, OUTPUT);
       if(answer){
-        Serial << "-" << ownID << "- pm " << pin << " OUTPUT" << "\n";
+        Serial << "-" << ownID << "- pm " << pin << " OUTPUT" << LINE_ENDING;
       }
     } else {
       // error

@@ -22,6 +22,7 @@
 template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 #define maxLength 16
+#define LINE_ENDING ";\r\n"
 
 /* Command structure:
 pos:  01 23 4567 8901 23456
@@ -64,11 +65,13 @@ void loop () {
 
 void getIncomingChars() {
   char inChar = Serial.read();
-  if(inChar == ';' || inChar == '\n' || inChar == '\r'){
-    commandComplete = true;
-  } else {
-    command += inChar;
+  for(int i = 0; i < sizeof(LINE_ENDING); i++) {
+    if(LINE_ENDING[i] == inChar) {
+      commandComplete = true;
+      return;
+    }
   }
+  command += inChar;
 }
 
 void processCommand(){

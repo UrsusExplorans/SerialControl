@@ -22,6 +22,6 @@ void analogWriteFunc(){
   int value = parseArgument(AR2);
   analogWrite(pin, value);
   if(answer){
-    Serial << "-" << ownID << "- aw " << pin << " " << value << "\n";
+    Serial << "-" << ownID << "- aw " << pin << " " << value << LINE_ENDING;
   }
 }

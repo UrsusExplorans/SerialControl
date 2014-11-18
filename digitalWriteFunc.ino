@@ -22,13 +22,13 @@ void digitalWriteFunc(){
   if(getArgument(AR2).equals("HIGH")){
     digitalWrite(pin, HIGH);
     if(answer){
-      Serial << "-" << ownID << "- dw " << pin << " HIGH" << "\n";
+      Serial << "-" << ownID << "- dw " << pin << " HIGH" << LINE_ENDING;
     }
   } else {
     if(getArgument(AR2).equals(" LOW")){
       digitalWrite(pin, LOW);
       if(answer){
-        Serial << "-" << ownID << "- dw " << pin << " LOW" << "\n";
+        Serial << "-" << ownID << "- dw " << pin << " LOW" << LINE_ENDING;
       }
     } else {
       // error
