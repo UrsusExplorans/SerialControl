@@ -64,7 +64,7 @@ void loop () {
 
 void getIncomingChars() {
   char inChar = Serial.read();
-  if(inChar == 59 || inChar == 10 || inChar == 13){
+  if(inChar == ';' || inChar == '\n' || inChar == '\r'){
     commandComplete = true;
   } else {
     command += inChar;
@@ -130,12 +130,8 @@ int parseArgument(int argOffset){
   return ret;
 }
 
-boolean isNumeric(char character){
-  boolean ret = false;
-  if(character >= 48 && character <= 75){
-    ret = true;
-  }
-  return ret;
+boolean isNumeric(char character) {
+  return (character >= '0' && character <= '9');
 }
 
 String getArgument(int argOffset){
