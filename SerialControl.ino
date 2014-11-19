@@ -19,8 +19,8 @@
 
 
 
-// Adjust according to module ID
-#define OWN_ID     00
+// Adjust according to module ID - uncomment to override eeprom value
+// #define FORCE_ID  00  // 0 to 99
 #define BAUD_RATE  9600
 
 #define ANSWER       true
@@ -50,10 +50,16 @@ aw | analog write
 dr | digital read
 ar | analog read
 al | all
+id | set the device id within eeprom
 
 *******************************************************************************/
 
 
+#include <EEPROM.h>
+
+
+// eeprom address locations
+#define MEM_ID  11
 
 #define OFFSET_ID   0
 #define OFFSET_CMD  2
@@ -65,11 +71,20 @@ al | all
 template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 
+int OWN_ID = 0;
+
 String command = String();
 int CALL_ID = -1;
 
 
 void setup() {
+#ifdef FORCE_ID
+  // override device id
+  OWN_ID = FORCE_ID;
+#else
+  // load device id from eeprom
+  OWN_ID = EEPROM.read(MEM_ID);
+#endif
   Serial.begin(BAUD_RATE);
   command = "##alOUTP";
   allFunc();
@@ -133,6 +148,8 @@ void processCommand() {
   // al - all
   if (command.charAt(2) == 'a' && command.charAt(3) == 'l')
     allFunc();
+  if (command.charAt(2) == 'i' && command.charAt(3) == 'd')
+    setIdFunc();
   clearBuffer();
 }
 void clearBuffer() {

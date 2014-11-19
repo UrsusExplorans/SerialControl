@@ -100,3 +100,19 @@ void analogWriteFunc() {
   Serial << padInt(OWN_ID, 2) << "aw" << padInt(pin, SIZE_ARG) << padInt(value, SIZE_ARG) << LINE_ENDING;
 #endif
 }
+
+
+void setIdFunc() {
+  int id = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  if (id < 0 || id > 99) {
+#ifdef ANSWER
+    Serial << "OUTOFRANGE" << LINE_ENDING;
+#endif
+    return;
+  }
+  EEPROM.write(MEM_ID, id);
+  OWN_ID = id;
+#ifdef ANSWER
+  Serial << padInt(OWN_ID, 2) << "id" << LINE_ENDING;
+#endif
+}
