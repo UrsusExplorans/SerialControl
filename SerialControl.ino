@@ -101,21 +101,36 @@ void processCommand() {
   // check device id
   if (isNumeric(command.charAt(0)) && isNumeric(command.charAt(1)))
     CALL_ID = getIntArgument(0, 2);
-  if (CALL_ID != -1 && CALL_ID == OWN_ID) {
-    // pm - pin mode
-    if (command.charAt(2) == 'p' && command.charAt(3) == 'm')
-      pinModeFunc();
-    // dw - digital write
-    if (command.charAt(2) == 'd' && command.charAt(3) == 'w')
-      digitalWriteFunc();
-    // aw - analog write
-    if (command.charAt(2) == 'a' && command.charAt(3) == 'w')
-      analogWriteFunc();
-    // al - all
-    if (command.charAt(2) == 'a' && command.charAt(3) == 'l')
-      allFunc();
+  if (CALL_ID == -1) {
+    Serial << "ERROR" << LINE_ENDING;
+    clearBuffer();
+    return;
   }
-  // clear buffer
+  if (CALL_ID != OWN_ID) {
+    clearBuffer();
+    return;
+  }
+  // pm - pin mode
+  if (command.charAt(2) == 'p' && command.charAt(3) == 'm')
+    pinModeFunc();
+  // dw - digital write
+  if (command.charAt(2) == 'd' && command.charAt(3) == 'w')
+    digitalWriteFunc();
+  // aw - analog write
+  if (command.charAt(2) == 'a' && command.charAt(3) == 'w')
+    analogWriteFunc();
+  // dr - digital read
+  if (command.charAt(2) == 'd' && command.charAt(3) == 'r')
+    digitalReadFunc();
+  // ar - analog read
+  if (command.charAt(2) == 'a' && command.charAt(3) == 'r')
+    analogReadFunc();
+  // al - all
+  if (command.charAt(2) == 'a' && command.charAt(3) == 'l')
+    allFunc();
+  clearBuffer();
+}
+void clearBuffer() {
   command = "";
   CALL_ID = -1;
 }
