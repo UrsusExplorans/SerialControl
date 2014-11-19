@@ -98,6 +98,11 @@ void getIncomingChars() {
 
 
 void processCommand() {
+  if(command.length() == 0) {
+    Serial << "\r\n";
+    clearBuffer();
+    return;
+  }
   // check device id
   if (isNumeric(command.charAt(0)) && isNumeric(command.charAt(1)))
     CALL_ID = getIntArgument(0, 2);
