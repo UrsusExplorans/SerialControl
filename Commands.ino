@@ -19,22 +19,22 @@
 
 
 void allFunc(){
-  if(getArgument(AR1).equals(" LOW")){
+  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("_LOW")) {
     for(int i = 0; i < 14; i++){
       digitalWrite(i, LOW);
     }
   }
-  if(getArgument(AR1).equals("HIGH")){
+  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("HIGH")) {
     for(int i = 0; i < 14; i++){
       digitalWrite(i, HIGH);
     }
   }
-  if(getArgument(AR1).equals("OUTP")){
+  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("OUTP")) {
     for(int i = 0; i < 14; i++){
       pinMode(i, OUTPUT);
     }
   }
-  if(getArgument(AR1).equals("INPU")){
+  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("INPU")) {
     for(int i = 0; i < 14; i++){
       pinMode(i, INPUT);
     }
@@ -46,14 +46,14 @@ void allFunc(){
 
 
 void pinModeFunc(){
-  int pin = parseArgument(AR1);
-  if(getArgument(AR2).equals("INPU")){
+  int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("INPU")) {
     pinMode(pin, INPUT);
 #ifdef ANSWER
     Serial << "-" << OWN_ID << "- pm " << pin << " INPUT" << LINE_ENDING;
 #endif
   } else {
-    if(getArgument(AR2).equals("OUTP")){
+  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("OUTP")) {
       pinMode(pin, OUTPUT);
     } else {
       // error
@@ -66,14 +66,14 @@ void pinModeFunc(){
 
 
 void digitalWriteFunc(){
-  int pin = parseArgument(AR1);
-  if(getArgument(AR2).equals("HIGH")){
+  int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("HIGH")) {
     digitalWrite(pin, HIGH);
 #ifdef ANSWER
     Serial << "-" << OWN_ID << "- dw " << pin << " HIGH" << LINE_ENDING;
 #endif
   } else {
-    if(getArgument(AR2).equals(" LOW")){
+  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("_LOW")) {
       digitalWrite(pin, LOW);
     } else {
       // error
@@ -86,8 +86,8 @@ void digitalWriteFunc(){
 
 
 void analogWriteFunc(){
-  int pin = parseArgument(AR1);
-  int value = parseArgument(AR2);
+  int pin   = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  int value = getIntArgument(OFFSET_AR2, SIZE_ARG);
   analogWrite(pin, value);
 #ifdef ANSWER
   Serial << "-" << OWN_ID << "- aw " << pin << " " << value << LINE_ENDING;

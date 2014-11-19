@@ -54,11 +54,13 @@ al | all
 
 
 
-// Corresponding offests:
-#define ID  0
-#define CMD 2
-#define AR1 4
-#define AR2 8
+#define OFFSET_ID   0
+#define OFFSET_CMD  2
+#define OFFSET_AR1  4
+#define OFFSET_AR2  8
+#define SIZE_ARG  4
+
+
 
 int ownID = 0; // Adjust according to module ID
 
