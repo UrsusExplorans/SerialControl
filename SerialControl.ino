@@ -161,3 +161,15 @@ int getIntArgument(int offset, int width) {
 String getArgument(int offset, int width) {
   return command.substring(offset, offset + width);
 }
+
+
+String padInt(int val, byte width) {
+  String buf = String();
+  int pow = 1;
+  for (byte b = 1; b < width; b++) {
+    pow *= 10;
+    if(val < pow)
+      buf += '0';
+  }
+  return buf + val;
+}
