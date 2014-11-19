@@ -65,7 +65,7 @@ al | all
 template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 
-String command = String(MAX_LENGTH);
+String command = String();
 int CALL_ID = -1;
 
 
