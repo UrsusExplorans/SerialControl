@@ -125,44 +125,24 @@ void processCommand(){
   commandComplete = false;
 }
 
-boolean commandCorrect(){
-  boolean ret = false;
-  if(command.charAt(0) == '0' || command.charAt(0) == '1'){
-    if(isNumeric(command.charAt(1))){
-      recID = command.charAt(1) - 48;
-      if(command.charAt(0) == '1'){ recID = recID + 10; }
-      ret = true;
-    }
-  }
-  return ret;
-}
-
-int parseArgument(int argOffset){
-  int ret = 0;
-  String arg = command.substring(argOffset, argOffset + 4);
-  if(isNumeric(arg.charAt(3))){
-    ret = arg.charAt(3) - 48;
-    if(isNumeric(arg.charAt(2))){
-      ret = ret + (10 * (arg.charAt(2) - 48));
-      if(isNumeric(arg.charAt(1))){
-        ret = ret + (100 * (arg.charAt(1) - 48));
-        if(arg.charAt(0) == '-'){
-          ret = -ret;
-        } else {
-          if(isNumeric(arg.charAt(0))){
-            ret = ret + (1000 * (arg.charAt(0) - 48));
-          }
-        }
-      }
-    }
-  }
-  return ret;
-}
 
 boolean isNumeric(char character) {
   return (character >= '0' && character <= '9');
 }
 
-String getArgument(int argOffset){
-  return command.substring(argOffset, argOffset + 4);
+
+int getIntArgument(int offset, int width) {
+  int val = 0;
+  for (int i = offset; i < offset + width; i++) {
+    if(isNumeric(command.charAt(i))) {
+      val *= 10;
+      val += (command.charAt(i) - '0');
+    }
+  }
+  return val;
+}
+
+
+String getArgument(int offset, int width) {
+  return command.substring(offset, offset + width);
 }
