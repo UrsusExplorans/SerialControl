@@ -24,6 +24,7 @@ template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg)
 #define LINE_ENDING ";\r\n"
 #define BAUD_RATE  9600
 
+#define ANSWER       true
 #define MAX_LENGTH   16
 
 
@@ -60,7 +61,6 @@ al | all
 #define AR2 8
 
 int ownID = 0; // Adjust according to module ID
-boolean answer = true;
 
 String command = String(MAX_LENGTH);
 boolean commandComplete = false;

@@ -39,9 +39,9 @@ void allFunc(){
       pinMode(i, INPUT);
     }
   }
-  if(answer){
-    Serial << "-" << ownID << "- al " << getArgument(AR1) << LINE_ENDING;
-  }
+#ifdef ANSWER
+  Serial << "-" << OWN_ID << "- al " << getArgument(OFFSET_AR1, SIZE_ARG) << LINE_ENDING;
+#endif
 }
 
 
@@ -49,18 +49,18 @@ void pinModeFunc(){
   int pin = parseArgument(AR1);
   if(getArgument(AR2).equals("INPU")){
     pinMode(pin, INPUT);
-    if(answer){
-      Serial << "-" << ownID << "- pm " << pin << " INPUT" << LINE_ENDING;
-    }
+#ifdef ANSWER
+    Serial << "-" << OWN_ID << "- pm " << pin << " INPUT" << LINE_ENDING;
+#endif
   } else {
     if(getArgument(AR2).equals("OUTP")){
       pinMode(pin, OUTPUT);
-      if(answer){
-        Serial << "-" << ownID << "- pm " << pin << " OUTPUT" << LINE_ENDING;
-      }
     } else {
       // error
     }
+#ifdef ANSWER
+    Serial << "-" << OWN_ID << "- pm " << pin << " OUTPUT" << LINE_ENDING;
+#endif
   }
 }
 
@@ -69,19 +69,19 @@ void digitalWriteFunc(){
   int pin = parseArgument(AR1);
   if(getArgument(AR2).equals("HIGH")){
     digitalWrite(pin, HIGH);
-    if(answer){
-      Serial << "-" << ownID << "- dw " << pin << " HIGH" << LINE_ENDING;
-    }
+#ifdef ANSWER
+    Serial << "-" << OWN_ID << "- dw " << pin << " HIGH" << LINE_ENDING;
+#endif
   } else {
     if(getArgument(AR2).equals(" LOW")){
       digitalWrite(pin, LOW);
-      if(answer){
-        Serial << "-" << ownID << "- dw " << pin << " LOW" << LINE_ENDING;
-      }
     } else {
       // error
     }
   }
+#ifdef ANSWER
+    Serial << "-" << OWN_ID << "- dw " << pin << "_LOW" << LINE_ENDING;
+#endif
 }
 
 
@@ -89,7 +89,7 @@ void analogWriteFunc(){
   int pin = parseArgument(AR1);
   int value = parseArgument(AR2);
   analogWrite(pin, value);
-  if(answer){
-    Serial << "-" << ownID << "- aw " << pin << " " << value << LINE_ENDING;
-  }
+#ifdef ANSWER
+  Serial << "-" << OWN_ID << "- aw " << pin << " " << value << LINE_ENDING;
+#endif
 }
