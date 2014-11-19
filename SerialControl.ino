@@ -13,21 +13,43 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with SerialControl.  If not, see <http://www.gnu.org/licenses/>.
 
 *******************************************************************************/
 
-//#include <WString.h>
 
 template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 #define maxLength 16
 #define LINE_ENDING ";\r\n"
 
-/* Command structure:
-pos:  01 23 4567 8901 23456
-      id cm arg1 arg2
-*/
+
+
+/*******************************************************************************
+
+Command Structure
+=================
+pos: 12 34 5678 9012 345
+     ID CM ARG1 ARG2 ;RN
+     01 23 4567 8901 234
+  ID | device id
+  CM | command
+ARG1 | argument 1
+ARG2 | argument 2
+  RN | end of line
+
+Commands
+========
+pm | pin mode
+dw | digital write
+aw | analog write
+dr | digital read
+ar | analog read
+al | all
+
+*******************************************************************************/
+
+
 
 // Corresponding offests:
 #define ID  0
