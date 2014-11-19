@@ -18,16 +18,15 @@
 *******************************************************************************/
 
 
-template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 // Adjust according to module ID
 #define OWN_ID     00
-#define maxLength 16
-#define LINE_ENDING ";\r\n"
 #define BAUD_RATE  9600
 
 #define ANSWER       true
 #define MAX_LENGTH   16
+#define LINE_ENDING  ";\r\n"
+
 
 
 /*******************************************************************************
@@ -63,66 +62,62 @@ al | all
 #define SIZE_ARG  4
 
 
+template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
 
 
 String command = String(MAX_LENGTH);
-boolean commandComplete = false;
 int CALL_ID = -1;
+
 
 void setup() {
   Serial.begin(BAUD_RATE);
-  command = "00alOUTP";
+  command = "##alOUTP";
   allFunc();
-  command = "00al LOW";
+  command = "##al_LOW";
   allFunc();
   command = "";
 }
 
+
 void loop () {
-  if(Serial.available() > 0) {
+  if (Serial.available() > 0)
     getIncomingChars();
-  }
-
-  if (commandComplete == true) {
-    processCommand();
-  }
-
 }
+
 
 void getIncomingChars() {
   char inChar = Serial.read();
-  for(int i = 0; i < sizeof(LINE_ENDING); i++) {
-    if(LINE_ENDING[i] == inChar) {
-      commandComplete = true;
+  for (int i = 0; i < sizeof(LINE_ENDING); i++) {
+    if (LINE_ENDING[i] == inChar) {
+      processCommand();
       return;
     }
   }
   command += inChar;
 }
 
-void processCommand(){
-  if(commandCorrect() && (recID == ownID)){
-    if(command.charAt(2) == 'p' && command.charAt(3) == 'm'){ // pin mode
+
+void processCommand() {
+  // check device id
+  if (isNumeric(command.charAt(0)) && isNumeric(command.charAt(1)))
+    CALL_ID = getIntArgument(0, 2);
+  if (CALL_ID != -1 && CALL_ID == OWN_ID) {
+    // pm - pin mode
+    if (command.charAt(2) == 'p' && command.charAt(3) == 'm')
       pinModeFunc();
-    }
-
-    if(command.charAt(2) == 'd' && command.charAt(3) == 'w'){ // digital write
+    // dw - digital write
+    if (command.charAt(2) == 'd' && command.charAt(3) == 'w')
       digitalWriteFunc();
-    }
-
-    if(command.charAt(2) == 'a' && command.charAt(3) == 'w'){ // analog write
+    // aw - analog write
+    if (command.charAt(2) == 'a' && command.charAt(3) == 'w')
       analogWriteFunc();
-    }
-
-    if(command.charAt(2) == 'a' && command.charAt(3) == 'l'){ // all
+    // al - all
+    if (command.charAt(2) == 'a' && command.charAt(3) == 'l')
       allFunc();
-    }
-
   }
-  
+  // clear buffer
   command = "";
   CALL_ID = -1;
-  commandComplete = false;
 }
 
 
