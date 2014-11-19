@@ -22,7 +22,9 @@ template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg)
 
 #define maxLength 16
 #define LINE_ENDING ";\r\n"
+#define BAUD_RATE  9600
 
+#define MAX_LENGTH   16
 
 
 /*******************************************************************************
@@ -60,12 +62,12 @@ al | all
 int ownID = 0; // Adjust according to module ID
 boolean answer = true;
 
-String command = String(maxLength);
+String command = String(MAX_LENGTH);
 boolean commandComplete = false;
 int recID;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(BAUD_RATE);
   recID = 0;
   command = "00alOUTP";
   allFunc();
