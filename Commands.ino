@@ -74,7 +74,9 @@ void pinModeFunc() {
     return;
   }
   // error
+#ifdef ANSWER
   Serial << "ERROR" << LINE_ENDING;
+#endif
 }
 
 
@@ -97,15 +99,21 @@ void digitalWriteFunc() {
     return;
   }
   // error
+#ifdef ANSWER
   Serial << "ERROR" << LINE_ENDING;
+#endif
 }
 
 
 void analogWriteFunc() {
-  int pin   = getIntArgument(OFFSET_AR1, SIZE_ARG);
-  int value = getIntArgument(OFFSET_AR2, SIZE_ARG);
+  int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  int val = getIntArgument(OFFSET_AR2, SIZE_ARG);
   // set pwm
-  analogWrite(pin, value);
+  analogWrite(pin, val);
+#ifdef ANSWER
+  Serial << padInt(OWN_ID, 2) << "aw" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
+#endif
+}
 
 
 void digitalReadFunc() {

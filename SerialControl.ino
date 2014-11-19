@@ -36,6 +36,7 @@ Command Structure
 pos: 12 34 5678 9012 345
      ID CM ARG1 ARG2 ;RN
      01 23 4567 8901 234
+
   ID | device id
   CM | command
 ARG1 | argument 1
@@ -49,8 +50,14 @@ dw | digital write
 aw | analog write
 dr | digital read
 ar | analog read
-al | all
+al | all pins
 id | set the device id within eeprom
+
+Pin Modes
+=========
+OUTP | output mode (io or pwm)
+INHI | input mode (pulled high internally)
+INPU | input mode (floating, external resistor)
 
 *******************************************************************************/
 
@@ -61,11 +68,12 @@ id | set the device id within eeprom
 // eeprom address locations
 #define MEM_ID  11
 
+// packet sections
 #define OFFSET_ID   0
 #define OFFSET_CMD  2
 #define OFFSET_AR1  4
 #define OFFSET_AR2  8
-#define SIZE_ARG  4
+#define SIZE_ARG    4
 
 
 template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
@@ -133,23 +141,31 @@ void processCommand() {
   // pm - pin mode
   if (command.charAt(2) == 'p' && command.charAt(3) == 'm')
     pinModeFunc();
+  else
   // dw - digital write
   if (command.charAt(2) == 'd' && command.charAt(3) == 'w')
     digitalWriteFunc();
+  else
   // aw - analog write
   if (command.charAt(2) == 'a' && command.charAt(3) == 'w')
     analogWriteFunc();
+  else
   // dr - digital read
   if (command.charAt(2) == 'd' && command.charAt(3) == 'r')
     digitalReadFunc();
+  else
   // ar - analog read
   if (command.charAt(2) == 'a' && command.charAt(3) == 'r')
     analogReadFunc();
+  else
   // al - all
   if (command.charAt(2) == 'a' && command.charAt(3) == 'l')
     allFunc();
+  else
   if (command.charAt(2) == 'i' && command.charAt(3) == 'd')
     setIdFunc();
+  else
+    Serial << "UNKNOWN" << LINE_ENDING;
   clearBuffer();
 }
 void clearBuffer() {
