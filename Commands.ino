@@ -40,7 +40,7 @@ void allFunc() {
       pinMode(i, INPUT);
   }
 #ifdef ANSWER
-  Serial << "-" << OWN_ID << "- al " << getArgument(OFFSET_AR1, SIZE_ARG) << LINE_ENDING;
+  Serial << OWN_ID << "al" << getArgument(OFFSET_AR1, SIZE_ARG) << LINE_ENDING;
 #endif
 }
 
@@ -51,7 +51,7 @@ void pinModeFunc() {
   if (getArgument(OFFSET_AR2, SIZE_ARG).equals("INPU")) {
     pinMode(pin, INPUT);
 #ifdef ANSWER
-    Serial << "-" << OWN_ID << "- pm " << pin << " INPUT" << LINE_ENDING;
+    Serial << OWN_ID << "pm" << pin << "INPUT" << LINE_ENDING;
 #endif
     return;
   }
@@ -59,7 +59,7 @@ void pinModeFunc() {
   if (getArgument(OFFSET_AR2, SIZE_ARG).equals("OUTP")) {
     pinMode(pin, OUTPUT);
 #ifdef ANSWER
-    Serial << "-" << OWN_ID << "- pm " << pin << " OUTPUT" << LINE_ENDING;
+    Serial << OWN_ID << "pm" << pin << "OUTPUT" << LINE_ENDING;
 #endif
     return;
   }
@@ -74,7 +74,7 @@ void digitalWriteFunc() {
   if (getArgument(OFFSET_AR2, SIZE_ARG).equals("HIGH")) {
     digitalWrite(pin, HIGH);
 #ifdef ANSWER
-    Serial << "-" << OWN_ID << "- dw " << pin << " HIGH" << LINE_ENDING;
+    Serial << OWN_ID << "dw" << pin << "HIGH" << LINE_ENDING;
 #endif
     return;
   }
@@ -82,7 +82,7 @@ void digitalWriteFunc() {
   if (getArgument(OFFSET_AR2, SIZE_ARG).equals("_LOW")) {
     digitalWrite(pin, LOW);
 #ifdef ANSWER
-    Serial << "-" << OWN_ID << "- dw " << pin << "_LOW" << LINE_ENDING;
+    Serial << OWN_ID << "dw" << pin << "_LOW" << LINE_ENDING;
 #endif
     return;
   }
@@ -97,6 +97,6 @@ void analogWriteFunc() {
   // set pwm
   analogWrite(pin, value);
 #ifdef ANSWER
-  Serial << "-" << OWN_ID << "- aw " << pin << " " << value << LINE_ENDING;
+  Serial << OWN_ID << "aw" << pin << value << LINE_ENDING;
 #endif
 }
