@@ -121,8 +121,15 @@ void getIncomingChars() {
 
 
 void processCommand() {
-  if(command.length() == 0) {
+  if (command.length() == 0) {
     Serial << "\r\n";
+    clearBuffer();
+    return;
+  }
+  // scanning for device id's
+  if (command.charAt(0) == 's' && command.charAt(1) == 'c' && command.charAt(2) == 'a' && command.charAt(3) == 'n') {
+    delay(10 * (OWN_ID + 1) );
+    Serial << "scan" << padInt(OWN_ID, 2) << LINE_ENDING;
     clearBuffer();
     return;
   }
