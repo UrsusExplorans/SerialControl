@@ -26,6 +26,7 @@
 #define ANSWER       true
 #define MAX_LENGTH   16
 #define LINE_ENDING  ";\r\n"
+#define SCAN_DELAY   20
 
 
 
@@ -128,8 +129,8 @@ void processCommand() {
   }
   // scanning for device id's
   if (command.charAt(0) == 's' && command.charAt(1) == 'c' && command.charAt(2) == 'a' && command.charAt(3) == 'n') {
-    delay(10 * (OWN_ID + 1) );
-    Serial << "scan" << padInt(OWN_ID, 2) << LINE_ENDING;
+    delay(SCAN_DELAY * (OWN_ID + 1) );
+    Serial << padInt(OWN_ID, 2) << "scan" << LINE_ENDING;
     clearBuffer();
     return;
   }
