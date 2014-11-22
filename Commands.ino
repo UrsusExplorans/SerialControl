@@ -21,22 +21,22 @@
 void allFunc() {
   // set all off/low
   if (getArgument(OFFSET_AR1, SIZE_ARG).equals("_LOW")) {
-    for (int i = 0; i < 14; i++)
+    for (int i = 2; i < 14; i++)
       digitalWrite(i, LOW);
   } else
   // set all on/high
   if (getArgument(OFFSET_AR1, SIZE_ARG).equals("HIGH")) {
-    for (int i = 0; i < 14; i++)
+    for (int i = 2; i < 14; i++)
       digitalWrite(i, HIGH);
   } else
   // set all to output mode
   if (getArgument(OFFSET_AR1, SIZE_ARG).equals("OUTP")) {
-    for (int i = 0; i < 14; i++)
+    for (int i = 2; i < 14; i++)
       pinMode(i, OUTPUT);
   } else
   // set all to input mode
   if (getArgument(OFFSET_AR1, SIZE_ARG).equals("INPU")) {
-    for (int i = 0; i < 14; i++)
+    for (int i = 2; i < 14; i++)
       pinMode(i, INPUT);
   }
 #ifdef ANSWER
