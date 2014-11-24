@@ -40,7 +40,7 @@ void allFunc() {
       pinMode(i, INPUT);
   }
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, 2) << "al" << getArgument(OFFSET_AR1, SIZE_ARG) << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "al" << getArgument(OFFSET_AR1, SIZE_ARG) << LINE_ENDING;
 #endif
 }
 
@@ -52,7 +52,7 @@ void pinModeFunc() {
     pinMode     (pin, INPUT_PULLUP);
     //digitalWrite(pin, HIGH);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, 2) << "pm" << padInt(pin, SIZE_ARG) << "INHI" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << "INHI" << LINE_ENDING;
 #endif
     return;
   }
@@ -60,7 +60,7 @@ void pinModeFunc() {
     digitalWrite(pin, LOW);
     pinMode(pin, INPUT);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, 2) << "pm" << padInt(pin, SIZE_ARG) << "INPU" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << "INPU" << LINE_ENDING;
 #endif
     return;
   }
@@ -69,7 +69,7 @@ void pinModeFunc() {
     digitalWrite(pin, LOW);
     pinMode     (pin, OUTPUT);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, 2) << "pm" << padInt(pin, SIZE_ARG) << "OUTP" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << "OUTP" << LINE_ENDING;
 #endif
     return;
   }
@@ -86,7 +86,7 @@ void digitalWriteFunc() {
   if (getArgument(OFFSET_AR2, SIZE_ARG).equals("HIGH")) {
     digitalWrite(pin, HIGH);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, 2) << "dw" << padInt(pin, SIZE_ARG) << "HIGH" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "dw" << padInt(pin, SIZE_ARG) << "HIGH" << LINE_ENDING;
 #endif
     return;
   }
@@ -94,7 +94,7 @@ void digitalWriteFunc() {
   if (getArgument(OFFSET_AR2, SIZE_ARG).equals("_LOW")) {
     digitalWrite(pin, LOW);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, 2) << "dw" << padInt(pin, SIZE_ARG) << "_LOW" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "dw" << padInt(pin, SIZE_ARG) << "_LOW" << LINE_ENDING;
 #endif
     return;
   }
@@ -111,7 +111,7 @@ void analogWriteFunc() {
   // set pwm
   analogWrite(pin, val);
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, 2) << "aw" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "aw" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
 #endif
 }
 
@@ -121,7 +121,7 @@ void digitalReadFunc() {
   // read digital
   int val = digitalRead(pin);
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, 2) << "dr" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "dr" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
 #endif
 }
 
@@ -131,7 +131,7 @@ void analogReadFunc() {
   // read analog
   int val = analogRead(pin);
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, 2) << "ar" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "ar" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
 #endif
 }
 
@@ -147,6 +147,6 @@ void setIdFunc() {
   EEPROM.write(MEM_ID, id);
   OWN_ID = id;
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, 2) << "id" << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "id" << LINE_ENDING;
 #endif
 }

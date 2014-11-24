@@ -78,6 +78,7 @@ INHI | input mode (pulled high internally)
 #define OFFSET_CMD  2
 #define OFFSET_AR1  4
 #define OFFSET_AR2  8
+#define SIZE_ID     2
 #define SIZE_ARG    4
 
 
@@ -134,13 +135,13 @@ void processCommand() {
   // scanning for device id's
   if (command.charAt(0) == 's' && command.charAt(1) == 'c' && command.charAt(2) == 'a' && command.charAt(3) == 'n') {
     delay(SCAN_DELAY * (OWN_ID + 1) );
-    Serial << padInt(OWN_ID, 2) << "scan" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "scan" << LINE_ENDING;
     clearBuffer();
     return;
   }
   // check device id
   if (isNumeric(command.charAt(0)) && isNumeric(command.charAt(1)))
-    CALL_ID = getIntArgument(0, 2);
+    CALL_ID = getIntArgument(0, SIZE_ID);
   if (CALL_ID == -1) {
     Serial << "ERROR" << LINE_ENDING;
     clearBuffer();
@@ -151,30 +152,30 @@ void processCommand() {
     return;
   }
   // pm - pin mode
-  if (command.charAt(2) == 'p' && command.charAt(3) == 'm')
+  if (command.charAt(SIZE_ID) == 'p' && command.charAt(SIZE_ID + 1) == 'm')
     pinModeFunc();
   else
   // dw - digital write
-  if (command.charAt(2) == 'd' && command.charAt(3) == 'w')
+  if (command.charAt(SIZE_ID) == 'd' && command.charAt(SIZE_ID + 1) == 'w')
     digitalWriteFunc();
   else
   // aw - analog write
-  if (command.charAt(2) == 'a' && command.charAt(3) == 'w')
+  if (command.charAt(SIZE_ID) == 'a' && command.charAt(SIZE_ID + 1) == 'w')
     analogWriteFunc();
   else
   // dr - digital read
-  if (command.charAt(2) == 'd' && command.charAt(3) == 'r')
+  if (command.charAt(SIZE_ID) == 'd' && command.charAt(SIZE_ID + 1) == 'r')
     digitalReadFunc();
   else
   // ar - analog read
-  if (command.charAt(2) == 'a' && command.charAt(3) == 'r')
+  if (command.charAt(SIZE_ID) == 'a' && command.charAt(SIZE_ID + 1) == 'r')
     analogReadFunc();
   else
   // al - all
-  if (command.charAt(2) == 'a' && command.charAt(3) == 'l')
+  if (command.charAt(SIZE_ID) == 'a' && command.charAt(SIZE_ID + 1) == 'l')
     allFunc();
   else
-  if (command.charAt(2) == 'i' && command.charAt(3) == 'd')
+  if (command.charAt(SIZE_ID) == 'i' && command.charAt(SIZE_ID + 1) == 'd')
     setIdFunc();
   else
     Serial << "UNKNOWN" << LINE_ENDING;
