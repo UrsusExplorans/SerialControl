@@ -162,7 +162,7 @@ void setIdFunc() {
   int id = getIntArgument(OFFSET_AR1, SIZE_ARG);
   if (id < 0 || id > 99) {
 #ifdef ANSWER
-    Serial << "OUTOFRANGE" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "ERRORid" << LINE_ENDING;
 #endif
     return;
   }
