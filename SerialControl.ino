@@ -121,9 +121,7 @@ void setup() {
   scanFunc();
   command = "##alOUTP";
   allFunc();
-  command = "##al_LOW";
-  allFunc();
-  command = "";
+  clearBuffer();
 }
 
 

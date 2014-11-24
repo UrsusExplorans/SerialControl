@@ -27,29 +27,44 @@ void scanFunc() {
 }
 
 
+// all pins
 void allFunc() {
-  // set all off/low
-  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("_LOW")) {
-    for (int i = PIN_FROM; i < PIN_TO; i++)
+  String arg = getArgument(OFFSET_AR1, SIZE_ARG);
+  arg.toUpperCase();
+  if (getArgument(OFFSET_AR1, SIZE_ARG - 1).equals("LOW"))
+    arg = "LOW_";
+  // set all to output mode off/low
+  if (arg.equals("OUTP") || arg.equals("LOW_")) {
+    for (int i = PIN_FROM; i < PIN_TO; i++) {
+      pinMode     (i, OUTPUT);
       digitalWrite(i, LOW);
+    }
   } else
-  // set all on/high
-  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("HIGH")) {
-    for (int i = PIN_FROM; i < PIN_TO; i++)
+  // set all to output mode on/high
+  if (arg.equals("HIGH")) {
+    for (int i = PIN_FROM; i < PIN_TO; i++) {
+      pinMode     (i, OUTPUT);
       digitalWrite(i, HIGH);
-  } else
-  // set all to output mode
-  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("OUTP")) {
-    for (int i = PIN_FROM; i < PIN_TO; i++)
-      pinMode(i, OUTPUT);
+    }
   } else
   // set all to input mode
-  if (getArgument(OFFSET_AR1, SIZE_ARG).equals("INPU")) {
+  if (arg.equals("INPU")) {
     for (int i = PIN_FROM; i < PIN_TO; i++)
       pinMode(i, INPUT);
+  } else
+  // set all to input pulled high mode
+  if (arg.equals("INHI")) {
+    for (int i = PIN_FROM; i < PIN_TO; i++)
+      pinMode(i, INPUT_PULLUP);
+  } else {
+    // error
+#ifdef ANSWER
+    Serial << padInt(OWN_ID, SIZE_ID) << "ERROR" << LINE_ENDING;
+#endif
+    return;
   }
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, SIZE_ID) << "al" << getArgument(OFFSET_AR1, SIZE_ARG) << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "al" << arg << LINE_ENDING;
 #endif
 }
 
