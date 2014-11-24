@@ -101,28 +101,29 @@ void pinModeFunc() {
 }
 
 
+// digital write
 void digitalWriteFunc() {
-  int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
-  // set output on/high
-  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("HIGH")) {
+  int  pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  char arg = command.charAt(OFFSET_AR2);
+  // set pin high
+  if (arg == '1' || arg == 'H' || arg == 'h') {
     digitalWrite(pin, HIGH);
 #ifdef ANSWER
     Serial << padInt(OWN_ID, SIZE_ID) << "dw" << padInt(pin, SIZE_ARG) << "HIGH" << LINE_ENDING;
 #endif
-    return;
-  }
-  // set output off/low
-  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("_LOW")) {
+  } else
+  // set pin low
+  if (arg == '0' || arg == 'L' || arg == 'l') {
     digitalWrite(pin, LOW);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, SIZE_ID) << "dw" << padInt(pin, SIZE_ARG) << "_LOW" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "dw" << padInt(pin, SIZE_ARG) << "LOW_" << LINE_ENDING;
 #endif
-    return;
-  }
-  // error
+  } else {
+    // error
 #ifdef ANSWER
-  Serial << padInt(OWN_ID, SIZE_ID) << "ERRORdw" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "ERRORdw" << LINE_ENDING;
 #endif
+  }
 }
 
 
