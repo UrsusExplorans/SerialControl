@@ -28,6 +28,9 @@
 #define LINE_ENDING  ";\r\n"
 #define SCAN_DELAY   20
 
+#define  PIN_FROM     2
+#define  PIN_TO       14
+
 
 
 /*******************************************************************************
