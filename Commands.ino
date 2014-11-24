@@ -127,10 +127,10 @@ void digitalWriteFunc() {
 }
 
 
+// pwm
 void analogWriteFunc() {
   int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
   int val = getIntArgument(OFFSET_AR2, SIZE_ARG);
-  // set pwm
   analogWrite(pin, val);
 #ifdef ANSWER
   Serial << padInt(OWN_ID, SIZE_ID) << "aw" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
@@ -138,9 +138,9 @@ void analogWriteFunc() {
 }
 
 
+// digital read
 void digitalReadFunc() {
   int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
-  // read digital
   int val = digitalRead(pin);
 #ifdef ANSWER
   Serial << padInt(OWN_ID, SIZE_ID) << "dr" << padInt(pin, SIZE_ARG) << padInt(val, SIZE_ARG) << LINE_ENDING;
@@ -148,6 +148,7 @@ void digitalReadFunc() {
 }
 
 
+// analog read
 void analogReadFunc() {
   int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
   // read analog

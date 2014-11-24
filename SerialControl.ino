@@ -205,6 +205,9 @@ void processCommand() {
 #endif
   clearBuffer();
 }
+
+
+// reset serial input buffer
 void clearBuffer() {
   command = "";
   CALL_ID = -1;
