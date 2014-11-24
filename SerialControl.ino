@@ -20,13 +20,13 @@
 
 
 // Adjust according to module ID - uncomment to override eeprom value
-// #define FORCE_ID  00  // 0 to 99
-#define BAUD_RATE  9600
+//#define  FORCE_ID     00  // 0 to 99  (comment this line to use eeprom/flash)
+#define  BAUD_RATE    9600
+#define  ANSWER       true
+#define  SCAN_DELAY   20
 
-#define ANSWER       true
-#define MAX_LENGTH   16
-#define LINE_ENDING  ";\r\n"
-#define SCAN_DELAY   20
+#define  MAX_LENGTH   16
+#define  LINE_ENDING  ";\r\n"
 
 #define  PIN_FROM     2
 #define  PIN_TO       14
@@ -49,6 +49,7 @@ ARG2 | argument 2
 
 Commands
 ========
+scan | request id number from all connected devices
 pm | pin mode
 dw | digital write
 aw | analog write
@@ -60,8 +61,8 @@ id | set the device id within eeprom
 Pin Modes
 =========
 OUTP | output mode (io or pwm)
-INHI | input mode (pulled high internally)
 INPU | input mode (floating, external resistor)
+INHI | input mode (pulled high internally)
 
 *******************************************************************************/
 
