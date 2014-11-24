@@ -108,6 +108,8 @@ void setup() {
 #elif defined ( is_SAM )
   OWN_ID = (int) DueFlashStorage().read(MEMADDR_ID);
 #endif
+  if (OWN_ID < 0 || OWN_ID > 99)
+    OWN_ID = 0;
   Serial.begin(BAUD_RATE);
   scanFunc();
   command = "##alOUTP";
