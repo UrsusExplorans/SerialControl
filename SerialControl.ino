@@ -32,6 +32,15 @@
 #define  PIN_TO       14
 
 
+// Arduino UNO
+#define  is_AVR
+#include <EEPROM.h>
+
+// Arduino DUE
+//#define  is_SAM
+//#include <DueFlashStorage.h>
+
+
 
 /*******************************************************************************
 
@@ -67,11 +76,8 @@ INHI | input mode (pulled high internally)
 *******************************************************************************/
 
 
-#include <EEPROM.h>
-
-
 // eeprom address locations
-#define MEM_ID  11
+#define MEMADDR_ID  11
 
 // packet sections
 #define OFFSET_ID   0
@@ -92,12 +98,14 @@ int CALL_ID = -1;
 
 
 void setup() {
+// override device id
 #ifdef FORCE_ID
-  // override device id
   OWN_ID = FORCE_ID;
-#else
-  // load device id from eeprom
-  OWN_ID = EEPROM.read(MEM_ID);
+// load device id from eeprom
+#elif defined ( is_AVR )
+  OWN_ID = EEPROM.read(MEMADDR_ID);
+#elif defined ( is_SAM )
+  OWN_ID = (int) DueFlashStorage().read(MEMADDR_ID);
 #endif
   Serial.begin(BAUD_RATE);
   command = "##alOUTP";

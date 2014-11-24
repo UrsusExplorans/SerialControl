@@ -144,7 +144,7 @@ void setIdFunc() {
 #endif
     return;
   }
-  EEPROM.write(MEM_ID, id);
+  EEPROM.write(MEMADDR_ID, id);
   OWN_ID = id;
 #ifdef ANSWER
   Serial << padInt(OWN_ID, SIZE_ID) << "id" << LINE_ENDING;
