@@ -16,6 +16,7 @@
     along with SerialControl.  If not, see <http://www.gnu.org/licenses/>.
 
 *******************************************************************************/
+#define VERSION "1.5"
 
 
 
@@ -108,6 +109,7 @@ void setup() {
   OWN_ID = (int) DueFlashStorage().read(MEMADDR_ID);
 #endif
   Serial.begin(BAUD_RATE);
+  scanFunc();
   command = "##alOUTP";
   allFunc();
   command = "##al_LOW";
@@ -142,8 +144,7 @@ void processCommand() {
   }
   // scanning for device id's
   if (command.charAt(0) == 's' && command.charAt(1) == 'c' && command.charAt(2) == 'a' && command.charAt(3) == 'n') {
-    delay(SCAN_DELAY * (OWN_ID + 1) );
-    Serial << padInt(OWN_ID, SIZE_ID) << "scan" << LINE_ENDING;
+    scanFunc();
     clearBuffer();
     return;
   }

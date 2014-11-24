@@ -18,6 +18,13 @@
 *******************************************************************************/
 
 
+// scan for device id's
+void scanFunc() {
+  delay( SCAN_DELAY * (OWN_ID + 2) );
+  Serial << padInt(OWN_ID, SIZE_ID) << "id" << VERSION << LINE_ENDING;
+}
+
+
 void allFunc() {
   // set all off/low
   if (getArgument(OFFSET_AR1, SIZE_ARG).equals("_LOW")) {
