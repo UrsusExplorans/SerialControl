@@ -82,7 +82,7 @@ void pinModeFunc() {
   }
   // error
 #ifdef ANSWER
-  Serial << "ERROR" << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "ERRORpm" << LINE_ENDING;
 #endif
 }
 
@@ -107,7 +107,7 @@ void digitalWriteFunc() {
   }
   // error
 #ifdef ANSWER
-  Serial << "ERROR" << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "ERRORdw" << LINE_ENDING;
 #endif
 }
 

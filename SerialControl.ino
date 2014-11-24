@@ -74,6 +74,13 @@ OUTP | output mode (io or pwm)
 INPU | input mode (floating, external resistor)
 INHI | input mode (pulled high internally)
 
+ERROR
+=====
+ERRORid | invalid id
+ERRORcm | unknown command
+ERRORpm | invalid pin mode
+ERRORdw | invalid output state
+
 *******************************************************************************/
 
 
@@ -153,6 +160,9 @@ void processCommand() {
   // validate id
   for (int i = 0; i < SIZE_ID; i++) {
     if (!isNumeric(command.charAt(i))) {
+#ifdef ANSWER
+      Serial << padInt(OWN_ID, SIZE_ID) << "ERRORid" << LINE_ENDING;
+#endif
       clearBuffer();
       return;
     }
@@ -190,7 +200,9 @@ void processCommand() {
   if (command.charAt(SIZE_ID) == 'i' && command.charAt(SIZE_ID + 1) == 'd')
     setIdFunc();
   else
-    Serial << "UNKNOWN" << LINE_ENDING;
+#ifdef ANSWER
+    Serial << padInt(OWN_ID, SIZE_ID) << "ERRORcm" << LINE_ENDING;
+#endif
   clearBuffer();
 }
 void clearBuffer() {
