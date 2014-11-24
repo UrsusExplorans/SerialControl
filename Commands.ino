@@ -69,37 +69,34 @@ void allFunc() {
 }
 
 
+// set pin mode
 void pinModeFunc() {
-  int pin = getIntArgument(OFFSET_AR1, SIZE_ARG);
-  // set mode input
-  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("INHI")) {
+  int    pin  = getIntArgument(OFFSET_AR1, SIZE_ARG);
+  String mode = getArgument   (OFFSET_AR2, SIZE_ARG);
+  mode.toUpperCase();
+  // set output mode
+  if (mode.equals("OUTP")) {
+    pinMode     (pin, OUTPUT);
+    digitalWrite(pin, LOW);
+  } else
+  // set input floating mode
+  if (mode.equals("INPU")) {
+    pinMode     (pin, INPUT);
+    digitalWrite(pin, LOW);
+  } else
+  // set input pulled high
+  if (mode.equals("INHI")) {
     pinMode     (pin, INPUT_PULLUP);
     //digitalWrite(pin, HIGH);
+  } else {
+    // error
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << "INHI" << LINE_ENDING;
+    Serial << padInt(OWN_ID, SIZE_ID) << "ERRORpm" << LINE_ENDING;
 #endif
     return;
   }
-  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("INPU")) {
-    digitalWrite(pin, LOW);
-    pinMode(pin, INPUT);
 #ifdef ANSWER
-    Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << "INPU" << LINE_ENDING;
-#endif
-    return;
-  }
-  // set mode output
-  if (getArgument(OFFSET_AR2, SIZE_ARG).equals("OUTP")) {
-    digitalWrite(pin, LOW);
-    pinMode     (pin, OUTPUT);
-#ifdef ANSWER
-    Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << "OUTP" << LINE_ENDING;
-#endif
-    return;
-  }
-  // error
-#ifdef ANSWER
-  Serial << padInt(OWN_ID, SIZE_ID) << "ERRORpm" << LINE_ENDING;
+  Serial << padInt(OWN_ID, SIZE_ID) << "pm" << padInt(pin, SIZE_ARG) << mode << LINE_ENDING;
 #endif
 }
 
