@@ -150,14 +150,15 @@ void processCommand() {
     clearBuffer();
     return;
   }
-  // check device id
-  if (isNumeric(command.charAt(0)) && isNumeric(command.charAt(1)))
-    CALL_ID = getIntArgument(0, SIZE_ID);
-  if (CALL_ID == -1) {
-    Serial << "ERROR" << LINE_ENDING;
-    clearBuffer();
-    return;
+  // validate id
+  for (int i = 0; i < SIZE_ID; i++) {
+    if (!isNumeric(command.charAt(i))) {
+      clearBuffer();
+      return;
+    }
   }
+  CALL_ID = getIntArgument(0, SIZE_ID);
+  // calling this device
   if (CALL_ID != OWN_ID) {
     clearBuffer();
     return;
