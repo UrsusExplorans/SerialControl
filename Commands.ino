@@ -21,7 +21,9 @@
 // scan for device id's
 void scanFunc() {
   delay( SCAN_DELAY * (OWN_ID + 2) );
+#ifdef ANSWER
   Serial << padInt(OWN_ID, SIZE_ID) << "id" << VERSION << LINE_ENDING;
+#endif
 }
 
 

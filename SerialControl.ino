@@ -147,7 +147,9 @@ void getIncomingChars() {
 
 void processCommand() {
   if (command.length() == 0) {
+#ifdef ANSWER
     Serial << "\r\n";
+#endif
     clearBuffer();
     return;
   }
