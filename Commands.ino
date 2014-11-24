@@ -166,7 +166,12 @@ void setIdFunc() {
 #endif
     return;
   }
+  // save to flash
+#if defined ( is_AVR )
   EEPROM.write(MEMADDR_ID, id);
+#elif defined ( is_SAM )
+  DueFlashStorage().write(MEMADDR_ID, (byte) id);
+#endif
   OWN_ID = id;
 #ifdef ANSWER
   Serial << padInt(OWN_ID, SIZE_ID) << "id" << LINE_ENDING;
