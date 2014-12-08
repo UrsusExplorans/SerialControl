@@ -92,8 +92,8 @@ ERRORdw | invalid output state
 #define OFFSET_CMD  2
 #define OFFSET_AR1  4
 #define OFFSET_AR2  8
-#define SIZE_ID     2
-#define SIZE_ARG    4
+#define SIZE_ID   2
+#define SIZE_ARG  4
 
 
 template<class T> inline Print &operator << (Print &obj, T arg) { obj.print(arg); return obj; }
